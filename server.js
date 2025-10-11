@@ -140,7 +140,7 @@ app.post('/criar-inscricao-pix', async (req, res) => {
             update: { nome, cidade, tamanho_camisa, genero, faixa_etaria, telefone },
             create: { nome, cpf, cidade, tamanho_camisa, genero, faixa_etaria, telefone },
         });
-        const valorInscricao = 0.01;
+        const valorInscricao = 75.00;
         const paymentBody = {
             transaction_amount: valorInscricao,
             description: `Inscrição de ${nome}`,
