@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Silverte Atletismo - Corrida 2025</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+  <script src="/socket.io/socket.io.js"></script>
+
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    :root {
+      --primary-red: #E00000;
+      --secondary-yellow: #FFD700;
+    }
+    .bg-primary-red { background-color: var(--primary-red); }
+    .hover\:bg-primary-red-darker:hover { background-color: #C00000; }
+    .text-secondary-yellow { color: var(--secondary-yellow); }
+    input[type='radio']:checked {
+      background-color: var(--primary-red);
+      border-color: var(--primary-red);
+    }
+    .sponsor-logo {
+      /* ALTURA AJUSTADA AQUI */
+      max-height: 160px; /* Deixei as imagens um pouco maiores */
+      width: auto;
+      opacity: 0.8;
+      transition: all 0.3s ease;
+    }
+    .sponsor-logo:hover {
+      opacity: 1;
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+  <header class="relative h-[80vh] md:h-screen bg-gray-900 flex items-center justify-center overflow-hidden">
+    <img src="img/img2.jpg" alt="Silverte Atletismo" class="absolute inset-0 w-full h-full object-cover opacity-20 filter blur-sm">
+    <div class="absolute inset-0 bg-black/70"></div>
+    <div class="relative z-10 flex flex-col items-center justify-center h-full text-center text-white p-6">
+      <h1 class="text-4xl md:text-6xl font-black uppercase tracking-wide text-secondary-yellow drop-shadow-md">Corrida de Rua Juscelinense</h1>
+      <p class="mt-4 text-lg md:text-2xl font-light max-w-3xl">Desafie-se, supere limites, celebre a paixão pelo esporte.</p>
+      <a href="#inscricao" class="mt-10 bg-primary-red hover:bg-primary-red-darker text-white font-bold py-4 px-12 rounded-full text-lg transition duration-300 transform hover:scale-105 shadow-xl">
+        Inscreva-se Agora
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <section class="py-20 md:py-28 bg-white">
+      <div class="max-w-6xl mx-auto px-6 text-center">
+        <h2 class="text-3xl md:text-4xl font-bold mb-16 text-primary-red">Por que Participar?</h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div class="bg-gray-50 rounded-2xl shadow-lg p-8 hover:scale-105 transition transform">
+            <div class="bg-primary-red/10 text-primary-red w-16 h-16 flex items-center justify-center rounded-full mx-auto mb-6"><i class="fas fa-medal fa-2x"></i></div>
+            <h3 class="text-xl font-bold mb-3">Supere-se</h3>
+            <p class="text-gray-600">Desafie seus limites e conquiste novas metas pessoais em diferentes distâncias.</p>
+          </div>
+          <div class="bg-gray-50 rounded-2xl shadow-lg p-8 hover:scale-105 transition transform">
+            <div class="bg-secondary-yellow/20 text-yellow-500 w-16 h-16 flex items-center justify-center rounded-full mx-auto mb-6"><i class="fas fa-users fa-2x"></i></div>
+            <h3 class="text-xl font-bold mb-3">Conexão</h3>
+            <p class="text-gray-600">Participe de uma comunidade apaixonada por esporte e estilo de vida saudável.</p>
+          </div>
+          <div class="bg-gray-50 rounded-2xl shadow-lg p-8 hover:scale-105 transition transform">
+            <div class="bg-green-100 text-green-600 w-16 h-16 flex items-center justify-center rounded-full mx-auto mb-6"><i class="fas fa-heartbeat fa-2x"></i></div>
+            <h3 class="text-xl font-bold mb-3">Saúde</h3>
+            <p class="text-gray-600">A corrida é um dos esportes mais completos para corpo e mente. Viva essa experiência!</p>
+          </div>
+          <div class="bg-gray-50 rounded-2xl shadow-lg p-8 hover:scale-105 transition transform">
+            <div class="bg-blue-100 text-blue-600 w-16 h-16 flex items-center justify-center rounded-full mx-auto mb-6"><i class="fas fa-glass-cheers fa-2x"></i></div>
+            <h3 class="text-xl font-bold mb-3">Diversão</h3>
+            <p class="text-gray-600">Celebre com música, energia e um ambiente inesquecível para toda a família.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-20 bg-gray-100">
+      <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+        <div>
+          <img src="img/organizador.jpg" alt="Organizador do Evento" class="w-56 h-56 md:w-64 md:h-64 rounded-full shadow-lg object-cover mx-auto md:mx-0">
+        </div>
+        <div>
+          <h2 class="text-3xl md:text-4xl font-bold text-primary-red mb-4">Sobre o Organizador</h2>
+          <p class="text-gray-700 leading-relaxed mb-4">
+            Olá, eu sou <strong>Silvestre</strong>, apaixonado por corrida de rua e responsável pelo grupo <em>Silvert Atletismo</em>. Organizamos este evento para promover saúde, esporte e integração entre atletas de todas as idades.
+          </p>
+          <p class="text-gray-700">
+            Nossa missão é inspirar pessoas a superarem seus limites e fortalecer a comunidade esportiva.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-20 bg-white">
+      <div class="max-w-6xl mx-auto px-6">
+        <h2 class="text-3xl md:text-4xl font-bold text-center text-primary-red mb-12">Fotos e Vídeos</h2>
+        <div id="galeria-dinamica" class="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
+          <p id="loading-message" class="col-span-full text-center text-gray-500">Carregando galeria...</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-20 bg-gray-100">
+      <div class="max-w-6xl mx-auto px-6">
+        <h2 class="text-3xl md:text-4xl font-bold text-center text-primary-red mb-12">Nossos Patrocinadores</h2>
+        <div class="swiper sponsor-swiper">
+          <div class="swiper-wrapper items-center">
+            <div class="swiper-slide flex justify-center">
+              <img src="img/img2.jpg" alt="Logo Patrocinador A" class="sponsor-logo">
+            </div>
+            <div class="swiper-slide flex justify-center">
+              <img src="img/img3.png" alt="Logo Patrocinador B" class="sponsor-logo">
+            </div>
+            <div class="swiper-slide flex justify-center">
+              <img src="img/img4.png" alt="Logo Patrocinador C" class="sponsor-logo">
+            </div>
+            <div class="swiper-slide flex justify-center">
+              <img src="img/img5.png" alt="Logo Patrocinador D" class="sponsor-logo">
+            </div>
+            <div class="swiper-slide flex justify-center">
+              <img src="img/img6.png" alt="Logo Patrocinador E" class="sponsor-logo">
+            </div>
+            <div class="swiper-slide flex justify-center">
+              <img src="img/img7.jpg" class="sponsor-logo">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="inscricao" class="py-20 md:py-28 bg-white">
+      <div class="max-w-2xl mx-auto px-6">
+        <div id="form-wrapper" class="bg-white p-8 sm:p-10 rounded-2xl shadow-2xl border border-gray-200">
+          <div id="form-header" class="mb-8 text-center">
+            <h2 class="text-3xl md:text-4xl font-extrabold text-primary-red mb-2">Faça sua Inscrição</h2>
+            <p class="text-gray-600">Preencha seus dados e garanta sua vaga!</p>
+          </div>
+
+          <form id="form-inscricao" class="space-y-5">
+            <div>
+              <label for="nome" class="block text-sm font-medium text-gray-700 mb-1">Nome Completo</label>
+              <input type="text" id="nome" name="nome" required class="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-primary-red focus:border-primary-red transition">
+            </div>
+            <div>
+              <label for="cpf" class="block text-sm font-medium text-gray-700 mb-1">CPF</label>
+              <input type="text" id="cpf" name="cpf" placeholder="000.000.000-00" required class="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-primary-red focus:border-primary-red transition">
+              <div id="cpf-feedback" class="text-sm h-5 mt-1"></div>
+            </div>
+            <div>
+              <label for="telefone" class="block text-sm font-medium text-gray-700 mb-1">Telefone (WhatsApp)</label>
+              <input type="tel" id="telefone" name="telefone" placeholder="(99) 99999-9999" required class="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-primary-red focus:border-primary-red transition">
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <div>
+                <label for="tamanho_camisa" class="block text-sm font-medium text-gray-700 mb-1">Tamanho da Camisa</label>
+                <select id="tamanho_camisa" name="tamanho_camisa" required class="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-primary-red focus:border-primary-red transition">
+                  <option value="">Selecione...</option>
+                  <option value="P">P</option>
+                  <option value="M">M</option>
+                  <option value="G">G</option>
+                  <option value="GG">GG</option>
+                  <option value="XG">XG</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Gênero</label>
+                <div class="flex items-center space-x-6 h-full">
+                  <div class="flex items-center">
+                    <input id="genero_masculino" name="genero" type="radio" value="Masculino" required class="focus:ring-primary-red h-4 w-4 text-primary-red border-gray-300">
+                    <label for="genero_masculino" class="ml-2 block text-sm text-gray-900">Masculino</label>
+                  </div>
+                  <div class="flex items-center">
+                    <input id="genero_feminino" name="genero" type="radio" value="Feminino" class="focus:ring-primary-red h-4 w-4 text-primary-red border-gray-300">
+                    <label for="genero_feminino" class="ml-2 block text-sm text-gray-900">Feminino</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <div>
+                <label for="faixa_etaria" class="block text-sm font-medium text-gray-700 mb-1">Faixa Etária</label>
+                <select id="faixa_etaria" name="faixa_etaria" required class="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-primary-red focus:border-primary-red transition">
+                  <option value="">Selecione...</option>
+                  <option value="Ate 18 anos">Até 18 anos</option>
+                  <option value="19-29 anos">19-29 anos</option>
+                  <option value="30-39 anos">30-39 anos</option>
+                  <option value="40-49 anos">40-49 anos</option>
+                  <option value="50-59 anos">50-59 anos</option>
+                  <option value="60+ anos">60+ anos</option>
+                </select>
+              </div>
+              <div>
+                <label for="cidade" class="block text-sm font-medium text-gray-700 mb-1">Cidade</label>
+                <input type="text" id="cidade" name="cidade" required class="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-primary-red focus:border-primary-red transition">
+              </div>
+            </div>
+
+            <button type="submit" id="submit-btn" class="w-full bg-primary-red hover:bg-primary-red-darker text-white font-bold py-4 px-4 rounded-lg text-lg transition duration-300 disabled:bg-gray-400 shadow-md flex items-center justify-center gap-2" disabled>
+              <i class="fas fa-qrcode"></i> Gerar QR Code para Pagamento
+            </button>
+          </form>
+
+          <div id="pix-container" class="hidden text-center mt-10">
+            <h3 class="text-2xl font-bold mb-3 text-primary-red">Finalize sua Inscrição com Pix</h3>
+            <p class="text-gray-600 mb-2">Escaneie o QR Code abaixo com o app do seu banco.</p>
+            <p class="text-gray-500 text-sm mb-6"><i class="fas fa-spinner fa-spin mr-2"></i>Aguardando confirmação do pagamento...</p>
+            <div class="md:flex md:gap-8 md:items-start">
+              <div class="flex-shrink-0 flex justify-center">
+                <div class="bg-white p-3 border border-gray-300 rounded-xl shadow-md">
+                  <img id="pix-qrcode-image" src="" alt="QR Code Pix" class="w-48 h-48 md:w-56 md:h-56">
+                </div>
+              </div>
+              <div class="flex-grow text-left mt-6 md:mt-0">
+                <p class="text-gray-600 mb-2 font-semibold">Ou use o Pix Copia e Cola:</p>
+                <div class="bg-gray-100 p-3 rounded-lg border border-gray-200">
+                  <textarea id="pix-copia-e-cola" class="w-full bg-transparent border-0 text-sm text-gray-700 resize-none focus:outline-none" rows="4" readonly></textarea>
+                </div>
+                <button id="btn-copiar" class="mt-3 w-full bg-primary-red hover:bg-primary-red-darker text-white font-semibold py-3 px-4 rounded-lg text-sm transition duration-300 shadow-md flex items-center justify-center gap-2">
+                  <i class="far fa-copy"></i> <span id="copy-text">Copiar Código</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="success-container" class="hidden bg-white p-8 sm:p-10 rounded-2xl shadow-2xl border-2 border-green-500 text-center">
+          <div class="text-green-500 text-6xl mb-4">
+            <i class="fas fa-check-circle"></i>
+          </div>
+          <h2 class="text-3xl font-bold text-gray-800 mb-2">Pagamento Confirmado!</h2>
+          <p id="success-message" class="text-gray-600 text-lg">Obrigado pela sua inscrição ${primeiroNome}! Nos vemos na corrida.</p>
+        </div>
+
+        <div id="status-message" class="text-center mt-4 font-semibold text-red-600"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-gray-900 text-white py-8">
+    <div class="max-w-5xl mx-auto px-6 text-center">
+      <p>&copy; 2025 Silvert Atletismo. Todos os direitos reservados.</p>
+      <div class="mt-4">
+        <a href="/admin" target="_blank" class="text-sm text-gray-400 hover:text-white transition duration-300">
+          <i class="fas fa-user-shield mr-1"></i> Painel do Administrador
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      try {
+        const formWrapper = document.getElementById('form-wrapper');
+        const successContainer = document.getElementById('success-container');
+        const successMessage = document.getElementById('success-message');
+        const form = document.getElementById('form-inscricao');
+        const statusMessage = document.getElementById('status-message');
+        const submitButton = document.getElementById('submit-btn');
+        const formHeader = document.getElementById('form-header');
+        const pixContainer = document.getElementById('pix-container');
+        const qrCodeImage = document.getElementById('pix-qrcode-image');
+        const pixCodeText = document.getElementById('pix-copia-e-cola');
+        const copyButton = document.getElementById('btn-copiar');
+        const copyTextElement = document.getElementById('copy-text');
+        const galeriaContainer = document.getElementById('galeria-dinamica');
+        const loadingMessage = document.getElementById('loading-message');
+
+        const cpfInput = document.getElementById('cpf');
+        const cpfFeedback = document.getElementById('cpf-feedback');
+
+        function validaCPF(cpf) {
+          if (typeof cpf !== 'string') return false;
+          cpf = cpf.replace(/[^\d]+/g, '');
+          if (cpf.length !== 11 || /^(\d)\1+$/.test(cpf)) return false;
+          let soma = 0, resto;
+          for (let i = 1; i <= 9; i++) soma += parseInt(cpf.substring(i - 1, i)) * (11 - i);
+          resto = (soma * 10) % 11;
+          if ((resto === 10) || (resto === 11)) resto = 0;
+          if (resto !== parseInt(cpf.substring(9, 10))) return false;
+          soma = 0;
+          for (let i = 1; i <= 10; i++) soma += parseInt(cpf.substring(i - 1, i)) * (12 - i);
+          resto = (soma * 10) % 11;
+          if ((resto === 10) || (resto === 11)) resto = 0;
+          if (resto !== parseInt(cpf.substring(10, 11))) return false;
+          return true;
+        }
+
+        if (cpfInput) {
+          cpfInput.addEventListener('input', () => {
+            const cpf = cpfInput.value;
+            if (validaCPF(cpf)) {
+              submitButton.disabled = false;
+              cpfFeedback.textContent = 'CPF válido!';
+              cpfFeedback.className = 'text-sm h-5 mt-1 text-green-600';
+              cpfInput.classList.remove('border-red-500');
+              cpfInput.classList.add('border-green-500');
+            } else {
+              submitButton.disabled = true;
+              cpfFeedback.textContent = 'CPF inválido.';
+              cpfFeedback.className = 'text-sm h-5 mt-1 text-red-500';
+              cpfInput.classList.remove('border-green-500');
+              cpfInput.classList.add('border-red-500');
+            }
+          });
+        }
+
+
+        new Swiper('.sponsor-swiper', {
+          loop: true,
+          speed: 3000,
+          autoplay: {
+            delay: 1,
+            disableOnInteraction: false,
+          },
+          slidesPerView: 2,
+          spaceBetween: 20,
+          breakpoints: {
+            640: { slidesPerView: 3, spaceBetween: 30 },
+            768: { slidesPerView: 4, spaceBetween: 40 },
+            1024: { slidesPerView: 5, spaceBetween: 50 },
+          },
+        });
+
+        const carregarGaleria = async () => {
+          if (!galeriaContainer) return;
+          try {
+            const response = await fetch('/api/galeria');
+            if (!response.ok) {
+              throw new Error('Não foi possível carregar a galeria.');
+            }
+            const midias = await response.json();
+
+            loadingMessage.style.display = 'none';
+            if (midias.length === 0) {
+              galeriaContainer.innerHTML = '<p class="col-span-full text-center text-gray-500">Nenhuma foto ou vídeo na galeria ainda.</p>';
+              return;
+            }
+
+            midias.forEach(midia => {
+              const mediaWrapper = document.createElement('div');
+              mediaWrapper.className = 'overflow-hidden rounded-xl shadow-md hover:scale-105 transform transition';
+              if (midia.tipo === 'video') {
+                mediaWrapper.innerHTML = `<video controls class="w-full h-60 object-cover"><source src="${midia.caminhoArquivo}" type="video/mp4">Seu navegador não suporta vídeos.</video>`;
+              } else {
+                mediaWrapper.innerHTML = `<img src="${midia.caminhoArquivo}" class="w-full h-60 object-cover" alt="Foto da corrida">`;
+              }
+              galeriaContainer.appendChild(mediaWrapper);
+            });
+          } catch (error) {
+            console.error(error);
+            loadingMessage.textContent = 'Erro ao carregar a galeria.';
+            loadingMessage.style.color = 'red';
+          }
+        };
+
+        if (form) {
+          form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            statusMessage.textContent = '';
+
+            const generoSelecionado = document.querySelector('input[name="genero"]:checked');
+            if (!generoSelecionado) {
+              statusMessage.textContent = 'Por favor, selecione o seu gênero.';
+              return;
+            }
+
+            submitButton.disabled = true;
+            submitButton.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Gerando QR Code...';
+
+            const formData = {
+              nome: document.getElementById('nome').value,
+              cpf: document.getElementById('cpf').value,
+              telefone: document.getElementById('telefone').value,
+              cidade: document.getElementById('cidade').value,
+              tamanho_camisa: document.getElementById('tamanho_camisa').value,
+              genero: generoSelecionado.value,
+              faixa_etaria: document.getElementById('faixa_etaria').value,
+            };
+
+            try {
+              const response = await fetch('/criar-inscricao-pix', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData),
+              });
+
+              if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error || 'Falha na comunicação com o servidor.');
+              }
+
+              const data = await response.json();
+              qrCodeImage.src = `data:image/jpeg;base64,${data.qr_code_base64}`;
+              pixCodeText.value = data.qr_code;
+              form.classList.add('hidden');
+              formHeader.classList.add('hidden');
+              pixContainer.classList.remove('hidden');
+
+              const socket = io();
+              socket.emit('join-room', data.inscritoId);
+              socket.on('payment-confirmed', (payload) => {
+                formWrapper.classList.add('hidden');
+                successMessage.textContent = `Obrigado pela sua inscrição, ${payload.nome}! Nos vemos na corrida.`;
+                successContainer.classList.remove('hidden');
+                successContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                socket.disconnect();
+              });
+
+            } catch (error) {
+              console.error("Erro no processo de inscrição:", error.message);
+              statusMessage.textContent = `Erro: ${error.message}`;
+              submitButton.disabled = false;
+              submitButton.innerHTML = '<i class="fas fa-qrcode mr-2"></i> Tentar Novamente';
+            }
+          });
+        }
+
+        if (copyButton) {
+          copyButton.addEventListener('click', () => {
+            pixCodeText.select();
+            document.execCommand('copy');
+            copyButton.classList.remove('bg-primary-red', 'hover:bg-primary-red-darker');
+            copyButton.classList.add('bg-green-600');
+            copyTextElement.textContent = 'Copiado!';
+            setTimeout(() => {
+              copyTextElement.textContent = 'Copiar Código';
+              copyButton.classList.remove('bg-green-600');
+              copyButton.classList.add('bg-primary-red', 'hover:bg-primary-red-darker');
+            }, 2000);
+          });
+        }
+
+        carregarGaleria();
+
+      } catch (error) {
+        console.error('Ocorreu um erro crítico na inicialização da página:', error);
+        document.body.innerHTML = '<div style="text-align: center; padding: 50px; font-family: sans-serif;"><h1>Erro Inesperado</h1><p>Ocorreu um erro ao carregar a página. Por favor, tente recarregar.</p></div>';
+      }
+    });
+  </script>
+</body>
+</html>

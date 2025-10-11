@@ -1,0 +1,57 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql" // Usando PostgreSQL (Railway).
+  url = env("DATABASE_URL")
+}
+
+// Model Inscrito ATUALIZADO
+model Inscrito {
+  id             Int      @id @default(autoincrement())
+  nome           String
+  cpf            String   @unique
+  cidade         String
+  tamanho_camisa String   // NOVO CAMPO
+  genero         String   // NOVO CAMPO
+  faixa_etaria   String   // NOVO CAMPO
+  telefone       String?
+  criadoEm       DateTime @default(now())
+  pagamento      Pagamento?
+  // O campo "idade" foi removido
+}
+
+model Pagamento {
+  id                Int      @id @default(autoincrement())
+  inscritoId        Int      @unique
+  inscrito          Inscrito @relation(fields: [inscritoId], references: [id])
+  mercadoPagoId     String   @unique
+  status            String   @default("pending") // ex: pending, approved, failed
+  valor             Float
+  dataCriacao       DateTime @default(now())
+  dataAtualizacao   DateTime @updatedAt
+}
+
+// Adicione este modelo ao final do seu arquivo schema.prisma
+
+model Admin {
+  id       Int      @id @default(autoincrement())
+  email    String   @unique
+  senha    String
+  criadoEm DateTime @default(now())
+}
+
+model Galeria {
+  id             Int      @id @default(autoincrement())
+  caminhoArquivo String
+  tipo           String   @default("imagem") // "imagem" ou "video"
+  titulo         String?
+  criadoEm       DateTime @default(now())
+}

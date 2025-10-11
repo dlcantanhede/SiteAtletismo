@@ -1,0 +1,35 @@
+{
+  "dependencies": {
+    "@prisma/client": "^6.17.1",
+    "bcryptjs": "^3.0.2",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.2",
+    "express": "^5.1.0",
+    "express-session": "^1.18.2",
+    "memorystore": "^1.6.7",
+    "mercadopago": "^2.8.0",
+    "multer": "^2.0.2",
+    "nodemailer": "^7.0.6",
+    "pdfkit": "^0.17.2",
+    "pdfmake": "^0.2.20",
+    "socket.io": "^4.8.1"
+  },
+  "name": "atletismo-site",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "prisma generate",
+    "migrate": "prisma migrate deploy",
+    "railway-start": "npx prisma migrate deploy && node server.js",
+    "seed": "node create-admin.js",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "prisma": "^6.17.1"
+  }
+}
