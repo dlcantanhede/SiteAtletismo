@@ -209,8 +209,9 @@
 
           <div id="pix-container" class="hidden text-center mt-10">
             <h3 class="text-2xl font-bold mb-3 text-primary-red">Finalize sua Inscrição com Pix</h3>
-            <p class="text-gray-600 mb-2">Escaneie o QR Code abaixo com o app do seu banco.</p>
-            <p class="text-gray-500 text-sm mb-6"><i class="fas fa-spinner fa-spin mr-2"></i>Aguardando confirmação do pagamento...</p>
+              <p class="text-gray-600 mb-2">Escaneie o QR Code abaixo com o app do seu banco.</p>
+              <p class="text-blue-600 font-semibold mb-6">Após a confirmação, você será redirecionado para o nosso grupo no WhatsApp!</p>
+              <p class="text-gray-500 text-sm mb-6"><i class="fas fa-spinner fa-spin mr-2"></i>Aguardando confirmação do pagamento...</p>
             <div class="md:flex md:gap-8 md:items-start">
               <div class="flex-shrink-0 flex justify-center">
                 <div class="bg-white p-3 border border-gray-300 rounded-xl shadow-md">
@@ -408,13 +409,21 @@
               const socket = io();
               socket.emit('join-room', data.inscritoId);
               socket.on('payment-confirmed', (payload) => {
-                formWrapper.classList.add('hidden');
-                successMessage.textContent = `Obrigado pela sua inscrição, ${payload.nome}! Nos vemos na corrida.`;
-                successContainer.classList.remove('hidden');
-                successContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                socket.disconnect();
+                  // 1. Mostra a mensagem de sucesso primeiro, como garantia.
+                  formWrapper.classList.add('hidden');
+                  successMessage.textContent = `Obrigado pela sua inscrição, ${payload.nome}! Redirecionando para o grupo...`;
+                  successContainer.classList.remove('hidden');
+                  successContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                  socket.disconnect();
+              
+                  // 2. Define o link do grupo do WhatsApp.
+                  const linkDoGrupo = "https://chat.whatsapp.com/BlmXdDIHt0pI3aImUz8reT";
+              
+                  // 3. Aguarda 3 segundos para o utilizador ler a mensagem e depois redireciona.
+                  setTimeout(() => {
+                      window.location.href = linkDoGrupo;
+                  }, 2000); //2s
               });
-
             } catch (error) {
               console.error("Erro no processo de inscrição:", error.message);
               statusMessage.textContent = `Erro: ${error.message}`;
