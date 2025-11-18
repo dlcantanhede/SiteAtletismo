@@ -19,7 +19,8 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "prisma generate",
+    "build": "prisma generate && npm run build:app",
+    "build:app": "next build"  // ou "vite build" ou o comando do seu framework,
     "migrate": "prisma migrate deploy",
     "railway-start": "npx prisma migrate deploy && node server.js",
     "seed": "node create-admin.js",
