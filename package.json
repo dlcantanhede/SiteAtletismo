@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "@prisma/client": "^6.17.1",
-    "bcryptjs": "^3.0.2",
+    "bcryptjs": "^3.0.2", 
     "cors": "^2.8.5",
     "dotenv": "^17.2.2",
     "express": "^5.1.0",
@@ -15,12 +15,12 @@
     "socket.io": "^4.8.1"
   },
   "name": "atletismo-site",
-  "version": "1.0.0",
+  "version": "1.0.0", 
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "prisma generate",
-    "migrate": "prisma migrate deploy",
+    "migrate": "prisma migrate deploy", 
     "railway-start": "npx prisma migrate deploy && node server.js",
     "seed": "node create-admin.js",
     "start": "node server.js"
