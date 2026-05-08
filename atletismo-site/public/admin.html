@@ -105,7 +105,6 @@
                                     <th class="p-4 font-semibold">Nome</th>
                                     <th class="p-4 font-semibold hidden lg:table-cell">WhatsApp</th>
                                     <th class="p-4 font-semibold hidden lg:table-cell">CPF</th>
-                                    <th class="p-4 font-semibold">Camisa</th>
                                     <th class="p-4 font-semibold hidden md:table-cell">Gênero</th>
                                     <th class="p-4 font-semibold hidden sm:table-cell">Faixa Etária</th>
                                     <th class="p-4 font-semibold hidden md:table-cell">Cidade</th>
@@ -226,7 +225,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     <td class="p-4">${inscrito.nome}</td>
                     <td class="p-4 hidden lg:table-cell">${inscrito.telefone}</td>
                     <td class="p-4 hidden lg:table-cell">${inscrito.cpf}</td>
-                    <td class="p-4 font-bold text-center">${inscrito.tamanho_camisa || 'N/A'}</td>
                     <td class="p-4 hidden md:table-cell">${inscrito.genero || 'N/A'}</td>
                     <td class="p-4 hidden sm:table-cell">${inscrito.faixa_etaria || 'N/A'}</td>
                     <td class="p-4 hidden md:table-cell">${inscrito.cidade}</td>
@@ -285,7 +283,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Adiciona o BOM para corrigir acentuação no Excel/Windows
     let csvContent = "data:text/csv;charset=utf-8,\uFEFF";
-    csvContent += "ID,Nome,CPF,Tamanho Camisa,Gênero,Faixa Etária,Cidade,Status Pagamento,Valor Pago\r\n";
+    csvContent += "ID,Nome,CPF,Gênero,Faixa Etária,Cidade,Status Pagamento,Valor Pago\r\n";
 
     inscritosFiltrados.forEach(i => {
         const status = i.pagamento?.status || 'pendente';
@@ -295,7 +293,6 @@ document.addEventListener('DOMContentLoaded', () => {
             `"${i.nome}"`,
             `"${i.telefone}"`,
             `"${i.cpf}"`,
-            `"${i.tamanho_camisa || ''}"`,
             `"${i.genero || ''}"`,
             `"${i.faixa_etaria || ''}"`,
             `"${i.cidade}"`,
