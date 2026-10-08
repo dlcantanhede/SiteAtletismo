@@ -340,7 +340,7 @@
           }
         };
 
-        if (form) {
+                if (form) {
           form.addEventListener('submit', async (event) => {
             event.preventDefault();
             statusMessage.textContent = '';
@@ -383,19 +383,20 @@
               formHeader.classList.add('hidden');
               pixContainer.classList.remove('hidden');
 
-              const socket = io();
-              socket.emit('join-room', data.inscritoId);
-              socket.on('payment-confirmed', (payload) => {
-                  // 1. Mostra a mensagem de sucesso primeiro, como garantia.
+              if (typeof io !== 'undefined') {
+                const socket = io();
+                socket.emit('join-room', data.inscritoId);
+                socket.on('payment-confirmed', (payload) => {
                   formWrapper.classList.add('hidden');
-                  successMessage.textContent = `Obrigado pela sua inscrição, ${payload.nome}! Redirecionando para o grupo...`;
+                  // Mensagem atualizada sem menção ao grupo
+                  successMessage.textContent = `Obrigado pela sua inscrição, ${payload.nome}! Nos vemos na corrida.`;
                   successContainer.classList.remove('hidden');
                   successContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
                   socket.disconnect();
-              
-              
-                  // 3. Aguarda 3 segundos para o utilizador ler a mensagem e depois redireciona.
-              catch (error) {
+                });
+              }
+
+            } catch (error) {
               console.error("Erro no processo de inscrição:", error.message);
               statusMessage.textContent = `Erro: ${error.message}`;
               submitButton.disabled = false;
@@ -403,6 +404,7 @@
             }
           });
         }
+
 
         if (copyButton) {
           copyButton.addEventListener('click', () => {
